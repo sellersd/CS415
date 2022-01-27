@@ -14,6 +14,7 @@ int main(int argc, char ** argv) {
     cout << "$ ";
     getline(cin, cmd);
     parse_cmd = parseCommandLine(cmd);
+    cout << parse_cmd << endl;
 
     /*
     while(cmd != "quit" && cmd != "q") {
@@ -48,7 +49,12 @@ char ** parseCommandLine(string CommandLine) {
       ptr = strtok(NULL, " ><|");
     }
 
+    cout << "contents of ptr_arr" << endl;
+    cout << "0 " << ptr_arr[0]
+        << "1 " << ptr_arr[1]
+        << "2 " << ptr_arr[2] << endl;
 
 
-     return ptr_arr;
+
+     //return &ptr_arr;
 }
