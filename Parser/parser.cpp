@@ -25,7 +25,7 @@ int main(int argc, char ** argv) {
         // cin.getline(cmd, 255, '\n');
     }
     */
-
+      return 0;
 }
 
 //char ** parseCommandLine(string CommandLine) {
