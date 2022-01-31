@@ -14,7 +14,7 @@ int main(int argc, char ** argv) {
     cout << "$ ";
     getline(cin, cmd);
     parse_cmd = parseCommandLine(cmd);
-    cout << parse_cmd << endl;
+    cout << "parse_cmd: " << parse_cmd << endl;
 
     /*
     while(cmd != "quit" && cmd != "q") {
@@ -32,10 +32,12 @@ int main(int argc, char ** argv) {
 //char ** parseCommandLine(string CommandLine) {
 char ** parseCommandLine(string CommandLine) {
 
-    int MAX_TOKENS = 10;
+    const int MAX_TOKENS = 10;
+    char ** ptr_arr[MAX_TOKENS];
+
+
     int count = 0;
     char delimiters[] = {'<', '>', '|', ' '};
-    char ** ptr_arr[MAX_TOKENS];
 
     // inspiration from
     // https://www.tutorialspoint.com/cpp_standard_library/cpp_string_c_str.htm
@@ -46,20 +48,28 @@ char ** parseCommandLine(string CommandLine) {
 
     // https://www.geeksforgeeks.org/double-pointer-pointer-pointer-c/
     char * ptr = strtok(c, " ><|") ;
-    // cout << "ptr:\t" << ptr << endl;
+
+    // Loop until entire string parsed or
+    // reached the size of the array
     while(ptr != NULL && count < MAX_TOKENS) {
+
+      // app pointer to token in array
       ptr_arr[count] = &ptr;
-      // cout << strtok(NULL, " ><|\0");
+      cout << "ptr_arr deref " << count << ": "<< *ptr_arr[count] << endl;
+
+      // If NULL is passed, continue working on the previous input
       ptr = strtok(NULL, delimiters);
-      // cout << "ptr:\t" << ptr << endl;
+
+      count++;
     }
 
     cout << "contents of ptr_arr: " << endl;
     for(int i = 0; i < MAX_TOKENS; i++) {
-      cout << i << '\t' << ptr_arr[i] << endl;
+      cout << "ptr_arr i " << i << '\t' << ptr_arr[i]
+          << '\t' << &ptr_arr[i] << endl;
     }
 
-    delete c;
+    return *ptr_arr;
 
      //return &ptr_arr;
 }
