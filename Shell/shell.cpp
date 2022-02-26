@@ -61,15 +61,16 @@ char ** parseCommandLine(string CommandLine) {
 int main()
 {
   string cmd;
+  arguments arg_list;
+
   while(true) {
       // parse_cmd = parseCommandLine(cmd);
       cout << "$ ";
       getline(cin, cmd);
-      parseCommandLine(cmd);
-      // getline(cin, cmd);
-      // cin.getline(cmd, 255, '\n');
+      arg_list.argv = parseCommandLine(cmd);
   }
 
+  // https://codex.cs.yale.edu/avi/os-book/OS10/slide-dir/index.html
   pid_t pid;
 
   /* fork a child process */
