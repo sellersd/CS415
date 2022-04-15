@@ -9,9 +9,11 @@
 
 using namespace std;
 
+// Global variables
 deque<string> inputQueue;
 const int SAMPLE_ARRIVAL_RATE = 3;
 
+// Instructor provided code to simulate input
 void simulateInput(int rate)
 {
   random_device rd{};
@@ -41,10 +43,12 @@ void simulateInput(int rate)
   }
 }
 
+// Functions for threads to write input to file
 void write() {
 
 }
 
+// Function for threads to read from deque
 void read() {
 
 }
