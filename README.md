@@ -5,4 +5,8 @@
 ---
 * Create a command line parser
 * Create a mini shell using exec and fork
+* Create a chat program using sockets
+* Classic Barbershop problem.
+* Reader Writer problem.
+* Virtual Memory problem.
 ---
