@@ -1,5 +1,4 @@
-
 CC=g++
 
-parse: parser.cpp
-	$(CC) parser.cpp $(CFLAGS) -o parse
+main: main.cpp
+	$(CC) main.cpp $(CFLAGS) -o simu.out
