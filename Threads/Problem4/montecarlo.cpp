@@ -5,7 +5,7 @@
 * COURSE: CS 415
 * ASSIGNMENT: Assignment 3: Threads
 * DESRCIPTION: Problem 4 of assignment 3.
-* Implement the Monte Carlo simulation with one thread per quadrant. 
+* Implement the Monte Carlo simulation with one thread per quadrant.
 **************************************************************************/
 #include <iostream>
 #include <thread>
@@ -32,7 +32,7 @@ void mc(int region, float *value) {
     uniform_real_distribution<double> dis(0.0, 1.0);
     double x,y;
 
-    cout << region << '\t' << value << endl;
+    // cout << region << '\t' << value << endl;
     int count = 0;
     int num_circle = 0;
     for(int i = 0; i < 10000; i++) {
@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
   thread threads[4];
   float total = 0;
 
-  cout << "Hello, World!" << endl;
+  cout << "Begining simulation...." << endl;
 
   for(int i = 0; i < 4; i++) {
     threads[i] = thread(mc, i, &values[i]);
@@ -97,5 +97,6 @@ int main(int argc, char *argv[]) {
   }
 
   cout << "pi approximation: " << total << endl;
+  cout << "Ending simulation...." << endl;
   return 0;
 }
