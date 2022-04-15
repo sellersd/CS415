@@ -1,4 +1,4 @@
-***********************************
+/***********************************
 * AUTHOR: David Sellers
 * TITLE: sum.cpp
 * DATE: April 2022
@@ -7,7 +7,7 @@
 * DESRCIPTION: Problem 3 of assignment 3. Create a multithreaded program
 * that will sum corresponding entries in two arrays and store the results
 * in a third array.
-***********************************
+***********************************/
 #include <iostream>
 #include <thread>
 #include <ctime>
