@@ -1,3 +1,13 @@
+/***********************************
+* AUTHOR: David Sellers
+* TITLE: main.cpp
+* DATE: April 2022
+* COURSE: CS 415
+* ASSIGNMENT: Reader Writer
+* DESRCIPTION: Read sensor data. A single thread inputs readings into a
+* dequeue and 10 threads read from the queue and write the readings to
+* corresponding files
+***********************************/
 #include <thread>
 #include <semaphore>
 #include <iostream>
@@ -8,9 +18,10 @@
 #include <chrono>
 #include <string>
 #include <typeinfo>
+#include <mutex>
 
 using namespace std;
-
+mutex reader;
 // Global variables
 deque<string> inputQueue;
 const int SAMPLE_ARRIVAL_RATE = 3;
@@ -53,37 +64,35 @@ void simulateInput(int rate)
   }
 }
 
-// Functions for threads to write input to file
-void write() {
-
-}
 
 // Function for threads to read from deque
 void read(int n) {
-  while(true) {
+//  while(true) {
     cout << endl;
     cout << "in read" << endl;
     // lock inputQueue
+    reader.lock();
     if(!inputQueue.empty()) {
-      cout << "Front is: " << inputQueue.front() << endl;
-      cout << "Front[0] is: " << inputQueue.front()[0] << endl;
-      cout << "Front substr is: " << inputQueue.front().substr(1) << endl;
-      cout << "n: " << n << endl;
-      cout << "Front[0] == n: " << (((int)inputQueue.front()[0] - 48) == n) << endl;
+      // cout << "Front is: " << inputQueue.front() << endl;
+      // cout << "Front[0] is: " << inputQueue.front()[0] << endl;
+      // cout << "Front substr is: " << inputQueue.front().substr(1) << endl;
+      // cout << "n: " << n << endl;
+      cout << inputQueue.front()[0] << " == " << n << ": " << (((int)inputQueue.front()[0] - 48) == n) << endl;
       bool match  = (((int)inputQueue.front()[0] - 48) == n);
       if(match) {
         cout << "Found a reading!" << endl;
 
 
         ofstream ofile;
-        ofile.open(files[n]);
+        ofile.open(files[n], ios::app);
         cout << "Writing to file " << n << endl;
         ofile << inputQueue.front().substr(1);
         ofile.close();
         inputQueue.pop_front();
       }
+      reader.unlock();
     this_thread::sleep_for(chrono::milliseconds(1000));
-    }
+ //   }
     // unlock inputQueue
   }
 }
@@ -104,9 +113,11 @@ int main(int argc, char *argv[]) {
   for(int i = 0; i < 10; i++) {
 
     threads[i] = thread(read, i);
-    threads[i].join();
   }
 
+  for(int i = 0; i < 10; i++) {
+    threads[i].join();
+  }
   cout << "Pausing three seconds for station identification" << endl;
   this_thread::sleep_for(chrono::milliseconds(3000));
   // Now start printing stuff from the queue

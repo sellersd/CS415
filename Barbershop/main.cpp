@@ -1,3 +1,12 @@
+/***********************************
+* AUTHOR: David Sellers
+* TITLE: main.cpp
+* DATE: April 2022
+* COURSE: CS 415
+* ASSIGNMENT: Barbershop
+* DESRCIPTION: Solve the classic barbershop problem using threads.
+***********************************/
+
 #include <iostream>
 #include <thread>
 #include <mutex>
