@@ -31,16 +31,20 @@ void barber() {
   while(true) {
     // check if cust arrived
     // readyCustomers unlocked and >0
+    if(readyCustomers > 0) {
 
     // awake acquire customer chair mutex
 
     // increment the number of available customer seats
+    available_seats++;
 
     // unlock the barber ready mutex
-
+    barberReady.unlock();
     //unlock the customer chair mutex
 
     // cut hair for random amount of time
+    this_thread::sleep_for(chrono::milliseconds(1000));
+    }
   }
 
 }
@@ -48,6 +52,7 @@ void barber() {
 void customer() {
   while(true) {
       // try to lock the mutex protecting updates to number of chairs
+      waitChairs.lock();
 
       if(available_seats > 0) {
           available_seats--;
@@ -55,7 +60,7 @@ void customer() {
           // signal the readyCustomers condtion variable
 
           // unlock the mutex protecting access to the chairs
-
+          waitChairs.unlock();
           // wait until the barber is ready
 
           // get hair cut
@@ -63,7 +68,7 @@ void customer() {
       }
       else {
         // unlock mutex protecting the chairs
-
+        waitChairs.unlock();
         // leave the barbershop disappointed
 
       }
