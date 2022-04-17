@@ -26,15 +26,18 @@ def fifo(page):
             pass
         else:
             num_faults += 1
+            print("fault, ", p, "not in ", loaded)
+            print("num_faults: ", num_faults)
             if len(loaded) < num_frames:
                 loaded.append(p)
             else:
                 loaded.popleft()
                 loaded.append(p)
-            print(loaded)
-    hit_ratio = 1 - num_faults / count
+        print(loaded)
+
+    hit_ratio =  str(num_faults) + "/" + str(count)
     print("\nNumber of faults: ", num_faults)
-    print("Hit ratio: ", round(hit_ratio, 4))
+    print("Hit ratio: ", hit_ratio)
     while(loaded):
         loaded.popleft()
 
@@ -56,6 +59,8 @@ def lru(page):
             pass
         else:
             num_faults += 1
+            print("fault, ", p, "not in ", loaded)
+            print("num_faults: ", num_faults)
             if len(loaded) < num_frames:
                 loaded.append(p)
             else:
@@ -74,9 +79,9 @@ def lru(page):
         page_time[p] = 0
         print(page_time, '\n')
 
-    hit_ratio =  1 - num_faults / count
+    hit_ratio =  str(num_faults) + "/" + str(count)
     print("\nNumber of faults: ", num_faults)
-    print("Hit ratio: ", round(hit_ratio, 4))
+    print("Hit ratio: ", hit_ratio)
 
 
 fifo(pages)
