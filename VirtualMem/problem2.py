@@ -32,7 +32,7 @@ def fifo(page):
                 loaded.popleft()
                 loaded.append(p)
             print(loaded)
-    hit_ratio = (count - num_faults) / count
+    hit_ratio = 1 - num_faults / count
     print("\nNumber of faults: ", num_faults)
     print("Hit ratio: ", round(hit_ratio, 4))
     while(loaded):
@@ -74,7 +74,7 @@ def lru(page):
         page_time[p] = 0
         print(page_time, '\n')
 
-    hit_ratio = (count - num_faults) / count
+    hit_ratio =  1 - num_faults / count
     print("\nNumber of faults: ", num_faults)
     print("Hit ratio: ", round(hit_ratio, 4))
 
