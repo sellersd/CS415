@@ -4,7 +4,7 @@
 # DATE: April 2022
 # COURSE: CS 415
 # ASSIGNMENT: Assignment 4: Virtual Memory
-# DESRCIPTION: Problem 2.
+# DESRCIPTION: Problem 1.
 # Simulate virtual memory
 ########################################################################
 
